@@ -1,0 +1,67 @@
+<button #help (click)="populateDepts()"> Help </button> <a *ngIf="helpInit >= 1" (click)="closeHelp()">DONE</a>
+<br>
+<hr>
+
+        <form *ngIf="helpInit == 0">
+          <select (change)="selectChangeHandler($event)">
+              <option *ngFor="let type of searchTypes" name="stype" [selected]="type[1] == 'Course Code'" value={{type[0]}}>
+                  {{ type[1] }}
+              </option>
+          </select>
+	  <input #searchInput type="text" name="searchInput" [(ngModel)]="searchStr" (keyup)="searchStr.length >=3 && searchSections()"/>
+	</form>
+<hr>
+<button *ngIf="helpInit == 0 && searchType == 'courseID' && searchStr.length >= 3" (click)="populateTeachers()" > Instructors </button>
+<div *ngIf="helpInit == 0 && searchType == 'courseID' && searchStr.length >=3 && instructors">
+   <button *ngFor="let teach of instructors">{{teach.instructor}}</button>
+</div>
+<div *ngIf="helpInit >= 1">
+   <button> Departments</button>
+   <br>
+   <button *ngFor="let dept of departments"  (click)="populateCourseCodes(dept.abbrev)">{{dept.fullname}}</button>
+</div>
+<hr>
+<div *ngIf="helpInit >= 2">
+   <button> Courses </button>
+   <br>
+   <button *ngFor="let course of coursecodes">{{course.courseID}} : {{course.title}}</button>
+</div>
+<br>
+<br>
+<div *ngIf="sections">
+  <div>
+    <table class="table table-striped table-hover">
+	 <thead>
+	  <tr>
+          <th>CRN</th>
+	  <th>Course</th>
+          <th>Sec</th>
+	  <th>Type</th>
+	  <th>Title</th>
+	  <th>Hours</th>
+	  <th>Days</th>
+	  <th>Times</th>
+          <th>Room</th>
+	  <th>Instructor</th>
+	  </tr>
+	 </thead>
+	  <tbody>
+	    <tr *ngFor="let section of sections;let i=index">
+                  <td>{{section.crn}}</td>
+		  <td>{{section.courseID}}</td>
+                  <td>{{section.section}}</td>
+		  <td>{{section.type}}</td>
+		  <td>{{section.title}}</td>
+		  <td>{{section.hours}}</td>
+		  <td>{{section.days}}</td>
+		  <td>{{section.time}}</td>
+                  <td>{{section.location}}</td>
+		  <td>{{section.instructor}}</td>
+		  
+		</tr>
+	  </tbody>
+	</table>
+   </div>
+	
+	
+</div>

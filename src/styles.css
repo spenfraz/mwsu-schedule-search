@@ -1,0 +1,22 @@
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+
+ th {
+        border-bottom:double;
+        /**background-color:#efb310;
+        background-color:#dcb102;*/
+        background-color:#e9be26;
+		text-align: center;
+ }
+ 
+ td {
+        padding-bottom: .45em;
+ }
+
+ tr {
+	   text-align: center;
+ }
+ 
